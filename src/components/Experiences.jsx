@@ -14,11 +14,13 @@ export const Experience = () => {
         position-z={1}
         lineHeight={0.8}
         textAlign={"center"}
+        rotation-y={degToRad(30)}
+        anchorY={"bottom"}
       >
         My Little{"\n"} Camping
         <meshBasicMaterial color="white" />
       </Text>
-      <group rotateY={degToRad(-25)}>
+      <group rotateY={degToRad(-25)} position-x={3}>
         <Camping scale={0.6} />
       </group>
       <Environment preset="sunset" />
