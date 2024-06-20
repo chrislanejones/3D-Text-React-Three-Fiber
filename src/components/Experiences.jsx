@@ -11,6 +11,10 @@ import * as THREE from "three";
 import { Camping } from "./Camping";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { useEffect, useRef } from "react";
+import { Color } from "three";
+
+const bloomColor = new Color("#fff");
+bloomColor.multiplyScalar(1.5);
 
 export const Experience = () => {
   const controls = useRef();
@@ -39,7 +43,7 @@ export const Experience = () => {
         anchorY={"bottom"}
       >
         My Little{"\n"} Camping
-        <meshBasicMaterial color="white">
+        <meshBasicMaterial color={bloomColor} toneMapped={false}>
           <RenderTexture attach={"map"}>
             <color attach="background" args={["#FFF"]} />
             <Environment preset="sunset" />
