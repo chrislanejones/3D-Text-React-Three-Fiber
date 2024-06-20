@@ -1,6 +1,7 @@
 import {
   CameraControls,
   Environment,
+  Float,
   MeshReflectorMaterial,
   OrbitControls,
   RenderTexture,
@@ -42,12 +43,14 @@ export const Experience = () => {
           <RenderTexture attach={"map"}>
             <color attach="background" args={["#FFF"]} />
             <Environment preset="sunset" />
-            <Camping
-              scale={1.6}
-              rotation-y={-degToRad(25)}
-              rotation-x={degToRad(40)}
-              position-y={-0.5}
-            />
+            <Float floatIntensity={4} rotationIntensity={5}>
+              <Camping
+                scale={1.6}
+                rotation-y={-degToRad(25)}
+                rotation-x={degToRad(40)}
+                position-y={-0.5}
+              />
+            </Float>
           </RenderTexture>
         </meshBasicMaterial>
       </Text>
