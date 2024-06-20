@@ -3,6 +3,7 @@ import {
   Environment,
   MeshReflectorMaterial,
   OrbitControls,
+  RenderTexture,
   Text,
 } from "@react-three/drei";
 import * as THREE from "three";
@@ -37,7 +38,18 @@ export const Experience = () => {
         anchorY={"bottom"}
       >
         My Little{"\n"} Camping
-        <meshBasicMaterial color="white" />
+        <meshBasicMaterial color="white">
+          <RenderTexture attach={"map"}>
+            <color attach="background" args={["#FFF"]} />
+            <Environment preset="sunset" />
+            <Camping
+              scale={1.6}
+              rotation-y={-degToRad(25)}
+              rotation-x={degToRad(40)}
+              position-y={-0.5}
+            />
+          </RenderTexture>
+        </meshBasicMaterial>
       </Text>
       <group rotateY={degToRad(-25)} position-x={3}>
         <Camping scale={0.6} />
