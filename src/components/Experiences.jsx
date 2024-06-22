@@ -8,13 +8,13 @@ import {
   Text,
   useFont,
 } from "@react-three/drei";
-import * as THREE from "three";
 import { Camping } from "./Camping";
-import { degToRad } from "three/src/math/MathUtils.js";
+import { degToRad, lerp } from "three/src/math/MathUtils";
 import { useEffect, useRef } from "react";
 import { Color } from "three";
 import { currentPageAtom } from "./UI";
 import { useAtom } from "jotai";
+import { useFrame } from "@react-three/fiber";
 
 const bloomColor = new Color("#fff");
 bloomColor.multiplyScalar(1.5);
@@ -23,7 +23,16 @@ export const Experience = () => {
   const controls = useRef();
   const meshFitCameraHome = useRef();
   const meshFitCameraCamp = useRef();
+  const textMaterial = useRef();
   const [currentPage, setCurrentPage] = useAtom(currentPageAtom);
+
+  useFrame((_, delta) => {
+    textMaterial.current.opacity = lerp(
+      textMaterial.current.opacity,
+      currentPage === "home" || currentPage === "intro" ? 1 : 0,
+      delta * 1.5
+    );
+  });
 
   const intro = async () => {
     controls.current.dolly(-22);
@@ -35,10 +44,12 @@ export const Experience = () => {
   };
 
   const fitCamera = async () => {
-    if (currentPage === "home") {
+    if (currentPage === "camp") {
       controls.current.fitToBox(meshFitCameraCamp.current, true);
+      controls.current.smoothTime = 0.8;
     } else {
       controls.current.fitToBox(meshFitCameraHome.current, true);
+      controls.current.smoothTime = 1.6;
     }
   };
 
@@ -70,7 +81,11 @@ export const Experience = () => {
         anchorY={"bottom"}
       >
         LET'S GO{"\n"} CAMPING
-        <meshBasicMaterial color={bloomColor} toneMapped={false}>
+        <meshBasicMaterial
+          color={bloomColor}
+          toneMapped={false}
+          ref={textMaterial}
+        >
           <RenderTexture attach={"map"}>
             <color attach="background" args={["#FFF"]} />
             <Environment preset="sunset" />
@@ -87,7 +102,7 @@ export const Experience = () => {
       </Text>
       <group rotateY={degToRad(-25)} position-x={3}>
         <Camping scale={0.6} />
-        <mesh ref={meshFitCameraCamp}>
+        <mesh ref={meshFitCameraCamp} visible={false}>
           <boxGeometry args={[2, 1, 2]} />
           <meshBasicMaterial
             color="red"

@@ -13,7 +13,7 @@ export const UI = () => {
       >
         <div className="h-[66%]"></div>
         <button
-          onClick={() => setCurrentPage("store")}
+          onClick={() => setCurrentPage("camp")}
           className="pointer-events-auto py-4 px-8 bg-orange-400 text-white font-black rounded-full hover:bg-orange-600 cursor-pointer transition-colors duration-500"
         >
           ENTER
