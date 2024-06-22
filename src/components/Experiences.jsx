@@ -6,6 +6,7 @@ import {
   OrbitControls,
   RenderTexture,
   Text,
+  useFont,
 } from "@react-three/drei";
 import * as THREE from "three";
 import { Camping } from "./Camping";
