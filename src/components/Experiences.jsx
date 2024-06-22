@@ -13,6 +13,8 @@ import { Camping } from "./Camping";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { useEffect, useRef } from "react";
 import { Color } from "three";
+import { currentPageAtom } from "./UI";
+import { useAtom } from "jotai";
 
 const bloomColor = new Color("#fff");
 bloomColor.multiplyScalar(1.5);
@@ -20,15 +22,24 @@ bloomColor.multiplyScalar(1.5);
 export const Experience = () => {
   const controls = useRef();
   const meshFitCameraHome = useRef();
+  const meshFitCameraCamp = useRef();
+  const [currentPage, setCurrentPage] = useAtom(currentPageAtom);
 
   const intro = async () => {
     controls.current.dolly(-22);
     controls.current.smoothTime = 1.6;
+    setTimeout(() => {
+      setCurrentPage("home");
+    }, 1200);
     fitCamera();
   };
 
   const fitCamera = async () => {
-    controls.current.fitToBox(meshFitCameraHome.current, true);
+    if (currentPage === "home") {
+      controls.current.fitToBox(meshFitCameraCamp.current, true);
+    } else {
+      controls.current.fitToBox(meshFitCameraHome.current, true);
+    }
   };
 
   useEffect(() => {
@@ -36,9 +47,10 @@ export const Experience = () => {
   }, []);
 
   useEffect(() => {
+    fitCamera();
     window.addEventListener("resize", fitCamera);
-    return () => window.removeEventListener("resize, fitCamera");
-  }, []);
+    return () => window.removeEventListener("resize", fitCamera);
+  }, [currentPage]);
 
   return (
     <>
@@ -57,7 +69,7 @@ export const Experience = () => {
         rotation-y={degToRad(30)}
         anchorY={"bottom"}
       >
-        My Little{"\n"} Camping
+        LET'S GO{"\n"} CAMPING
         <meshBasicMaterial color={bloomColor} toneMapped={false}>
           <RenderTexture attach={"map"}>
             <color attach="background" args={["#FFF"]} />
@@ -75,6 +87,14 @@ export const Experience = () => {
       </Text>
       <group rotateY={degToRad(-25)} position-x={3}>
         <Camping scale={0.6} />
+        <mesh ref={meshFitCameraCamp}>
+          <boxGeometry args={[2, 1, 2]} />
+          <meshBasicMaterial
+            color="red"
+            transparent
+            opacity={0.5}
+          ></meshBasicMaterial>
+        </mesh>
       </group>
       <mesh position-y={-0.48} rotation-x={-Math.PI / 2}>
         <planeGeometry args={[100, 100]} />
