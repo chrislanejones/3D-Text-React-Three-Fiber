@@ -18,11 +18,16 @@ bloomColor.multiplyScalar(1.5);
 
 export const Experience = () => {
   const controls = useRef();
+  const meshFitCameraHome = useRef();
 
   const intro = async () => {
     controls.current.dolly(-22);
     controls.current.smoothTime = 1.6;
-    controls.current.dolly(22, true);
+    fitCamera();
+  };
+
+  const fitCamera = async () => {
+    controls.current.fitToBox(meshFitCameraHome.current, true);
   };
 
   useEffect(() => {
@@ -32,6 +37,10 @@ export const Experience = () => {
   return (
     <>
       <CameraControls ref={controls} />
+      <mesh ref={meshFitCameraHome}>
+        <boxGeometry />
+        <meshBasicMaterial color="orange" transparent opacity={2.5} />
+      </mesh>
       <Text
         font="fonts/NotoSans_Condensed-ExtraBold.ttf"
         position-x={-1.3}
