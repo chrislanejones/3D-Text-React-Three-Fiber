@@ -34,12 +34,17 @@ export const Experience = () => {
     intro();
   }, []);
 
+  useEffect(() => {
+    window.addEventListener("resize", fitCamera);
+    return () => window.removeEventListener("resize, fitCamera");
+  }, []);
+
   return (
     <>
       <CameraControls ref={controls} />
-      <mesh ref={meshFitCameraHome}>
-        <boxGeometry />
-        <meshBasicMaterial color="orange" transparent opacity={2.5} />
+      <mesh ref={meshFitCameraHome} position-z={1.5} visible={false}>
+        <boxGeometry args={[7.5, 2, 2]} />
+        <meshBasicMaterial color="orange" transparent opacity={0.5} />
       </mesh>
       <Text
         font="fonts/NotoSans_Condensed-ExtraBold.ttf"
@@ -91,3 +96,5 @@ export const Experience = () => {
     </>
   );
 };
+
+useFont.preload("fonts/NotoSans_Condensed-ExtraBold.ttf");
