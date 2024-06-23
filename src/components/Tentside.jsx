@@ -15,9 +15,9 @@ export function Tentside(props) {
         material={materials.mat13}
         position-z={0.1}
       >
-        <sphereGeometry />
-        <meshBasicMaterial />
-        <Decal debug position={[0, 0.9, 0.75]} scale={[1, 1, 1]}>
+        <sphereGeometry color="black" />
+        <meshBasicMaterial color="black" />
+        <Decal debug position={[1, 0.2, 0.1]} scale={[1, 1, 1]}>
           <meshStandardMaterial
             roughness={1}
             transparent
