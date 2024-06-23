@@ -1,17 +1,18 @@
 import {
   CameraControls,
+  Cloud,
   Decal,
   Environment,
   Float,
   MeshReflectorMaterial,
   OrbitControls,
   RenderTexture,
+  Sky,
   Text,
   useFont,
 } from "@react-three/drei";
 import { Camping } from "./Camping";
 import { Tent } from "./Tent";
-import { Tentside } from "./Tentside";
 import { currentPageAtom } from "./UI";
 import { degToRad, lerp } from "three/src/math/MathUtils";
 import { useEffect, useRef } from "react";
@@ -75,13 +76,16 @@ export const Experience = () => {
       </mesh>
       <Text
         font="fonts/NotoSans_Condensed-ExtraBold.ttf"
-        position-x={-1.3}
-        position-y={-0.5}
-        position-z={1}
+        position-x={-4.5}
+        position-y={1.1}
+        position-z={1.8}
         lineHeight={0.8}
         textAlign={"center"}
-        rotation-y={degToRad(30)}
-        anchorY={"bottom"}
+        rotation-y={degToRad(27)}
+        rotation-x={degToRad(-30)}
+        rotation-z={degToRad(15)}
+        anchorX={"bottom"}
+        anchorY={"center"}
       >
         LET'S GO{"\n"} CAMPING
         <meshBasicMaterial
@@ -104,13 +108,18 @@ export const Experience = () => {
         </meshBasicMaterial>
       </Text>
       <group rotateY={degToRad(-25)} position-x={3}>
-        <Camping scale={0.6} />
-        <Tent position={[-7, 0, -1]} rotation-y={-degToRad(60)} scale={2.2} />
-        <Tentside
-          position={[-7, 0, -1]}
-          rotation-y={-degToRad(60)}
-          scale={2.2}
-        ></Tentside>
+        <Cloud
+          color="#eed0d0"
+          seed={2}
+          position={[-0.6, 0.2, 0.6]}
+          scale={0.1}
+          rotation-z={degToRad(90)}
+          growth={3}
+          opacity={0.8}
+          speed={1}
+        />
+        <Camping scale={0.6} position-y={-0.5} />
+        <Tent position={[-7.3, 0, -1]} rotation-y={-degToRad(60)} scale={2.5} />
         <mesh ref={meshFitCameraCamp} visible={false}>
           <boxGeometry args={[2, 1, 2]} />
           <meshBasicMaterial

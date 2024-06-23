@@ -252,51 +252,6 @@ export function Camping(props) {
           geometry={nodes.group1146075737.geometry}
           material={materials.mat15}
         />
-        <mesh
-          name="group1374130805"
-          geometry={nodes.group1374130805.geometry}
-          material={materials.mat21}
-        />
-        <mesh
-          name="group903640800"
-          geometry={nodes.group903640800.geometry}
-          material={materials.mat21}
-        />
-        <mesh
-          name="group1075032789"
-          geometry={nodes.group1075032789.geometry}
-          material={materials.mat15}
-        />
-        <mesh
-          name="group774324054"
-          geometry={nodes.group774324054.geometry}
-          material={materials.mat15}
-        />
-        <mesh
-          name="group1484014363"
-          geometry={nodes.group1484014363.geometry}
-          material={materials.mat15}
-        />
-        <mesh
-          name="group511150639"
-          geometry={nodes.group511150639.geometry}
-          material={materials.mat15}
-        />
-        <mesh
-          name="group2137964724"
-          geometry={nodes.group2137964724.geometry}
-          material={materials.mat21}
-        />
-        <mesh
-          name="group1541698971"
-          geometry={nodes.group1541698971.geometry}
-          material={materials.mat24}
-        />
-        <mesh
-          name="group1188624501"
-          geometry={nodes.group1188624501.geometry}
-          material={materials.mat24}
-        />
         <group name="group663504923">
           <mesh
             name="mesh663504923"
