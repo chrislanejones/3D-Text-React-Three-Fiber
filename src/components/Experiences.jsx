@@ -1,13 +1,10 @@
 import {
   CameraControls,
   Cloud,
-  Decal,
   Environment,
   Float,
   MeshReflectorMaterial,
-  OrbitControls,
   RenderTexture,
-  Sky,
   Text,
   useFont,
 } from "@react-three/drei";
@@ -118,8 +115,9 @@ export const Experience = () => {
           opacity={0.8}
           speed={1}
         />
-        <Camping scale={0.6} position-y={-0.5} />
         <Tent position={[-7.3, 0, -1]} rotation-y={-degToRad(60)} scale={2.5} />
+        <Camping scale={0.6} position-y={-0.5} html />
+
         <mesh ref={meshFitCameraCamp} visible={false}>
           <boxGeometry args={[2, 1, 2]} />
           <meshBasicMaterial
