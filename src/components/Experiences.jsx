@@ -1,5 +1,6 @@
 import {
   CameraControls,
+  Decal,
   Environment,
   Float,
   MeshReflectorMaterial,
@@ -9,10 +10,12 @@ import {
   useFont,
 } from "@react-three/drei";
 import { Camping } from "./Camping";
+import { Tent } from "./Tent";
+import { Tentside } from "./Tentside";
+import { currentPageAtom } from "./UI";
 import { degToRad, lerp } from "three/src/math/MathUtils";
 import { useEffect, useRef } from "react";
 import { Color } from "three";
-import { currentPageAtom } from "./UI";
 import { useAtom } from "jotai";
 import { useFrame } from "@react-three/fiber";
 
@@ -102,6 +105,12 @@ export const Experience = () => {
       </Text>
       <group rotateY={degToRad(-25)} position-x={3}>
         <Camping scale={0.6} />
+        <Tent position={[-7, 0, -1]} rotation-y={-degToRad(60)} scale={2.2} />
+        <Tentside
+          position={[-7, 0, -1]}
+          rotation-y={-degToRad(60)}
+          scale={2.2}
+        ></Tentside>
         <mesh ref={meshFitCameraCamp} visible={false}>
           <boxGeometry args={[2, 1, 2]} />
           <meshBasicMaterial
